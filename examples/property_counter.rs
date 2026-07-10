@@ -50,7 +50,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     for file in std::env::args().skip(1) {
         let rs = File::open(&file).and_then(|mut f| f.read_to_end(&mut buffer));
         if let Err(e) = rs {
-            println!("unable to read file {}: {}", &file, e);
+            println!("unable to read file {}: {}", file, e);
             continue;
         }
 
@@ -60,7 +60,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
             .parse();
 
         let replay = if let Err(e) = replay {
-            println!("unable to parse file {}: {}", &file, e);
+            println!("unable to parse file {}: {}", file, e);
             continue;
         } else {
             replay.unwrap()
