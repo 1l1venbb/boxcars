@@ -1462,18 +1462,16 @@ impl AttributeDecoder {
         if let Some(size) = bits.read_u8() {
             let mut res = Vec::with_capacity(size as usize);
             for _ in 0..size {
-                if let Some(attribute_size) = bits.read_u8() {
+                {
+                    let attribute_size = bits.read_u8()?;
                     let mut products = Vec::with_capacity(attribute_size as usize);
                     for _ in 0..attribute_size {
-                        if let Some(product) = self.decode_product(bits, buf) {
+                        {
+                            let product = self.decode_product(bits, buf)?;
                             products.push(product);
-                        } else {
-                            return None;
                         }
                     }
                     res.push(products);
-                } else {
-                    return None;
                 }
             }
             Some(res)
