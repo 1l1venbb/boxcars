@@ -134,6 +134,17 @@ pub struct CamSettings {
     pub stiffness: f32,
     pub swivel: f32,
     pub transition: Option<f32>,
+
+    /// Season 24 (v868.34.12) appended three floats and two booleans to the camera
+    /// settings. Their exact meaning has not been established yet. In the sample
+    /// replay the first two floats are the same for every player (5.8 and 10.8),
+    /// the third float always matches `swivel`, and the booleans are consistently
+    /// `false` and `true`.
+    pub unknown1: Option<f32>,
+    pub unknown2: Option<f32>,
+    pub unknown3: Option<f32>,
+    pub unknown4: Option<bool>,
+    pub unknown5: Option<bool>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -716,6 +727,19 @@ impl AttributeDecoder {
             None
         };
 
+        let (unknown1, unknown2, unknown3, unknown4, unknown5) =
+            if self.version >= VersionTriplet(868, 34, 12) {
+                (
+                    Some(bits.read_f32()?),
+                    Some(bits.read_f32()?),
+                    Some(bits.read_f32()?),
+                    Some(bits.read_bit()?),
+                    Some(bits.read_bit()?),
+                )
+            } else {
+                (None, None, None, None, None)
+            };
+
         Some(CamSettings {
             fov,
             height,
@@ -724,6 +748,11 @@ impl AttributeDecoder {
             stiffness,
             swivel,
             transition,
+            unknown1,
+            unknown2,
+            unknown3,
+            unknown4,
+            unknown5,
         })
     }
 
