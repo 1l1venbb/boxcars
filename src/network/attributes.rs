@@ -716,9 +716,11 @@ impl AttributeDecoder {
             None
         };
 
-        // Season 24 (v868.34.12) appended three floats and two booleans to the
-        // camera settings. Their meaning hasn't been established, so skip over
-        // them to keep the bit stream aligned rather than exposing them.
+        // Season 24 (v868.34.12) appended 98 bits to the camera settings: three
+        // floats and two booleans. RocketRP names these CameraAccelRate,
+        // CameraDecelRate, FreeLookSpeed, bUnconstrainRotation and
+        // bFreeLookSmoothing. Skip over them to keep the bit stream aligned
+        // rather than exposing values whose layout isn't settled.
         if self.version >= VersionTriplet(868, 34, 12) {
             bits.read_f32()?;
             bits.read_f32()?;

@@ -102,6 +102,8 @@ pub(crate) static ATTRIBUTES: phf::Map<&'static str, AttributeTag> = phf::phf_ma
     "TAGame.CameraSettingsActor_TA:bUsingSwivel" => AttributeTag::Boolean,
     "TAGame.CameraSettingsActor_TA:CameraPitch" => AttributeTag::Byte,
     "TAGame.CameraSettingsActor_TA:CameraYaw" => AttributeTag::Byte,
+    "TAGame.CameraSettingsActor_TA:FreeLookAnchorPitch" => AttributeTag::Byte,
+    "TAGame.CameraSettingsActor_TA:FreeLookAnchorYaw" => AttributeTag::Byte,
     "TAGame.CameraSettingsActor_TA:PRI" => AttributeTag::ActiveActor,
     "TAGame.CameraSettingsActor_TA:ProfileSettings" => AttributeTag::CamSettings,
     "TAGame.Cannon_TA:FireCount" => AttributeTag::Byte,
@@ -343,6 +345,7 @@ pub(crate) static ATTRIBUTES: phf::Map<&'static str, AttributeTag> = phf::phf_ma
     "TAGame.VehiclePickup_TA:bNoPickup" => AttributeTag::Boolean,
     "TAGame.VehiclePickup_TA:NewReplicatedPickupData" => AttributeTag::PickupNew,
     "TAGame.VehiclePickup_TA:ReplicatedPickupData" => AttributeTag::Pickup,
+    "TAGame.VehiclePickup_TA:RespawnDelayScale" => AttributeTag::Float,
     "TAGame.ViralItemActor_TA:ClientFXInfectedType" => AttributeTag::Byte,
     "TAGame.ViralItemActor_TA:InfectedStatus" => AttributeTag::Byte,
 };
